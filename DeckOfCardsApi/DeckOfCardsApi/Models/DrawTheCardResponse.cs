@@ -6,7 +6,9 @@
             public string deck_id { get; set; }
             public Card[] cards { get; set; }
             public int remaining { get; set; }
-        }
+
+       
+    }
 
       public class Card
         {

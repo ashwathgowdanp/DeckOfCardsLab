@@ -12,14 +12,17 @@ namespace DeckOfCardsApi.Controllers
         public HomeController(CardsApiService cardsApiService)
         {
             this.cardsApiService = cardsApiService;
+            
         }
 
         public async Task<IActionResult> Index()
         {
             try
             {
-                List<CardShuffle> result = await cardsApiService.GetShuffledCards(1);
-                return View(result);
+                CardShuffle result = await cardsApiService.GetShuffledCards();
+                
+                return await DrawCard(result.deck_id);
+               
             }
             catch (Exception ex)
             {
@@ -28,6 +31,23 @@ namespace DeckOfCardsApi.Controllers
                 return View();
             }
             
+        }
+
+        public async Task<IActionResult> DrawCard(string deckid)
+        {
+            try
+            {
+                DrawTheCardResponse drawcard = await cardsApiService.GetDrawCardsResponse(deckid);
+                return View(drawcard);
+                
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Exception = ex;
+                Debug.WriteLine(ex);
+                return View();
+            }
+
         }
 
         public IActionResult Privacy()

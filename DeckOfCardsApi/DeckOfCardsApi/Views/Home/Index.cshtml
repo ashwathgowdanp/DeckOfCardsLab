@@ -1,13 +1,11 @@
-﻿@model List<CardShuffle>
+﻿@model CardShuffle
 
 @if(Model != null)
 {
-    @foreach (var card in Model)
-    {
-        <p>@card.deck_id</p>
-        <p>@card.shuffled</p>
-        <p>@card.remaining</p>
-        <p>@card.success</p>
-        
-    }
+   
+        <p>@Model.deck_id</p>
+        <p>@Model.shuffled</p>
+        <p>@Model.remaining</p>
+        <p>@Model.success</p>
+       
 }
