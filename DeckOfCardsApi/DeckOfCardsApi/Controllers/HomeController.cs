@@ -38,7 +38,7 @@ namespace DeckOfCardsApi.Controllers
             try
             {
                 DrawTheCardResponse drawcard = await cardsApiService.GetDrawCardsResponse(deckid);
-                return View(drawcard);
+                return View("DrawCard", drawcard);
                 
             }
             catch (Exception ex)

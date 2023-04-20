@@ -14,7 +14,7 @@ namespace DeckOfCardsApi.Services
             _httpClient = httpClient;
         }
 
-        //https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+        
         public async Task<CardShuffle> GetShuffledCards()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"new/");

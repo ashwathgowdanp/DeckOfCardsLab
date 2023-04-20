@@ -1,6 +1,18 @@
 ﻿@model DrawTheCardResponse
 
+<h1>Selcted cards are</h1>
+<h3>Deck ID: @Model.deck_id</h3>
+<p>@Model.remaining</p>
+<p>@Model.cards[0].value</p>
+<a href=@Model.cards[0].images.svg><img src=@Model.cards[0].image></a>
 
-<h1>@Model.deck_id</h1>
+<a href=@Model.cards[1].images.svg><img src=@Model.cards[1].image></a>
+<a href=@Model.cards[2].images.svg><img src=@Model.cards[2].image></a>
+
+<a href=@Model.cards[3].images.svg><img src=@Model.cards[3].image></a>
+
+<a href=@Model.cards[4].images.svg><img src=@Model.cards[4].image></a>
+
+
 
 
