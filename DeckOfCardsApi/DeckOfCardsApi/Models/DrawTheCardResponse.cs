@@ -17,7 +17,9 @@
             public Images images { get; set; }
             public string value { get; set; }
             public string suit { get; set; }
-        }
+            public bool Keep { get; set; }
+           public string deck_id { get; set; }
+    }
 
         public class Images
         {

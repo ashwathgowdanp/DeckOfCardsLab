@@ -1,6 +1,7 @@
 ﻿using DeckOfCardsApi.Models;
 using DeckOfCardsApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace DeckOfCardsApi.Controllers
@@ -19,9 +20,7 @@ namespace DeckOfCardsApi.Controllers
         {
             try
             {
-                CardShuffle result = await cardsApiService.GetShuffledCards();
-                
-                return await DrawCard(result.deck_id);
+               return await DrawCard("new");
                
             }
             catch (Exception ex)
@@ -32,6 +31,33 @@ namespace DeckOfCardsApi.Controllers
             }
             
         }
+
+        [HttpPost]
+
+        public async Task<IActionResult> DrawCard(DrawTheCardResponse drawcard)
+        {
+          
+            try
+            {
+                string deckiddet = "new";
+                if (drawcard.remaining == 0)
+                {
+                    deckiddet = "new";
+                }
+                else
+                {
+                    deckiddet = drawcard.deck_id;
+                }
+                return await DrawCard(deckiddet);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Exception = ex;
+                Debug.WriteLine(ex);
+                return View();
+            }
+        }
+
 
         public async Task<IActionResult> DrawCard(string deckid)
         {
@@ -50,6 +76,8 @@ namespace DeckOfCardsApi.Controllers
 
         }
 
+        
+        
         public IActionResult Privacy()
         {
             return View();

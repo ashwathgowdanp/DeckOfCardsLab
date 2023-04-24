@@ -14,16 +14,7 @@ namespace DeckOfCardsApi.Services
             _httpClient = httpClient;
         }
 
-        
-        public async Task<CardShuffle> GetShuffledCards()
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync($"new/");
-            CardShuffle cards = await response.Content.ReadAsAsync<CardShuffle>();          
-
-            return cards;
-            
-        }
-
+      
         public async Task<DrawTheCardResponse> GetDrawCardsResponse(string deckid)
         {
          
@@ -34,6 +25,8 @@ namespace DeckOfCardsApi.Services
             return result;
 
         }
-        
+
+
+
     }
 }

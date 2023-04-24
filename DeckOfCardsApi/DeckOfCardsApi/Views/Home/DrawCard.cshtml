@@ -1,18 +1,72 @@
-﻿@model DrawTheCardResponse
+﻿@using DeckOfCardsApi.Models;
+@model DeckOfCardsApi.Models.DrawTheCardResponse
 
-<h1>Selcted cards are</h1>
-<h3>Deck ID: @Model.deck_id</h3>
-<p>@Model.remaining</p>
-<p>@Model.cards[0].value</p>
-<a href=@Model.cards[0].images.svg><img src=@Model.cards[0].image></a>
+@{
+    ViewData["Title"] = "DrawCard";
+}
 
-<a href=@Model.cards[1].images.svg><img src=@Model.cards[1].image></a>
-<a href=@Model.cards[2].images.svg><img src=@Model.cards[2].image></a>
 
-<a href=@Model.cards[3].images.svg><img src=@Model.cards[3].image></a>
+<h1>Deck Of Cards</h1>
 
-<a href=@Model.cards[4].images.svg><img src=@Model.cards[4].image></a>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class ="col-sm-3">
+            @Html.DisplayNameFor(model => model.remaining)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.remaining)
+        </dd>
 
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.deck_id)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.deck_id)
+        </dd>
+    </dl>
+    <br />
+    <form asp-action="DrawCard" asp-controller="Home">
+       
+        @{
+            int i = 0;
+            string cardDescription = "";
+
+
+            if (Model != null)
+            {
+                
+                @Html.HiddenFor(model => model.deck_id, new { Value = Model.deck_id })
+                @Html.HiddenFor(model => model.remaining, new { Value = Model.remaining })
+                foreach (var item in Model.cards)
+                {
+                    cardDescription =
+                    $"{item.value[0].ToString().ToUpper()}{item.value.Substring(1).ToLower()} of " +
+                    $"{item.suit[0].ToString().ToUpper()}{item.suit.Substring(1).ToLower()}";
+
+                    <label class="fancy-checkbox-label">
+                        <input asp-for="@Model.cards[i].code" type="hidden">
+                        <input asp-for="@Model.cards[i].Keep" class="form-control" type="checkbox">
+                        <img class="cardimage" src="@Html.DisplayFor(modelItem => item.image)">
+                        <br>
+                        @cardDescription
+                    </label>
+
+                    i++;
+                }
+            }
+        }
+
+        <p>
+            <div class="form-group">
+                <input type="submit" value="Draw Again" class="btn btn-primary" />
+               
+            </div>
+        </p>
+    </form>
+
+    
+</div>
 
 
 
